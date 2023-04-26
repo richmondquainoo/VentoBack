@@ -1,22 +1,21 @@
-package com.example.springApp.Entities;
+package com.example.ventoBack.Entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import javax.persistence.Entity;
 import lombok.*;
 
-import javax.persistence.Table;
+import javax.persistence.*;
+
 
 @AllArgsConstructor
-@Getter
-@Setter
-@Builder
-@ToString
-@JsonIgnoreProperties(ignoreUnknown = true)
-@Table(name ="event_category")
 @NoArgsConstructor
+
 public class Category {
-    private String eventCategory;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String eventCategory;
     private String image;
 
 }

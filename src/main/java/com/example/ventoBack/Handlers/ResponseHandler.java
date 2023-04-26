@@ -1,4 +1,4 @@
-package com.example.springApp.Handlers;
+package com.example.ventoBack.Handlers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

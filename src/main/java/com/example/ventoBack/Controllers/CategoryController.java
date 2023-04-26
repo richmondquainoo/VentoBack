@@ -1,24 +1,27 @@
-package com.example.springApp.Controllers;
+package com.example.ventoBack.Controllers;
 
-import com.example.springApp.Entities.Category;
-import com.example.springApp.Handlers.ResponseHandler;
-import com.example.springApp.Services.CategoryService;
-import com.example.springApp.Services.ServicesImp.CategoryServiceImp;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.ventoBack.Entities.Category;
+import com.example.ventoBack.Entities.Product;
+import com.example.ventoBack.Handlers.ResponseHandler;
+import com.example.ventoBack.Services.ServicesImp.CategoryServiceImp;
+import com.example.ventoBack.Services.ServicesImp.ProductServiceImp;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
+@RequiredArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/category")
 public class CategoryController {
 
 
     private final CategoryServiceImp categoryServiceImp;
+    private final ProductServiceImp productServiceImp;
 
-    public CategoryController(CategoryServiceImp categoryServiceImp) {
-        this.categoryServiceImp = categoryServiceImp;
-    }
 
 
     @GetMapping("/fetchAllCategories")
@@ -32,6 +35,8 @@ public class CategoryController {
         }
     }
 
+
+
     @PostMapping("/createCategory")
     public ResponseEntity<Object> createCategory(@RequestBody Category category){
         try{
@@ -42,4 +47,32 @@ public class CategoryController {
             return ResponseHandler.handleResponse("ERROR", HttpStatus.BAD_REQUEST,e.getMessage());
         }
     }
+
+
+    @PutMapping("/editCategory")
+    public ResponseEntity<Object> editProduct(@RequestBody @Valid Category category){
+        try {
+            Category editedCategory = categoryServiceImp.editCategory(category);
+            if(editedCategory!=null){
+                return ResponseHandler.handleResponse("Successfully edited Category", HttpStatus.OK,editedCategory);
+            }else{
+                return ResponseHandler.handleResponse("Category Id Not exist", HttpStatus.BAD_REQUEST,null);
+            }
+        }catch (Exception e){
+            return ResponseHandler.handleResponse("ERROR", HttpStatus.BAD_REQUEST,e.getMessage());
+        }
+    }
+
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Object> deleteCategory(@PathVariable Long id){
+        try {
+            categoryServiceImp.deleteCategory(id);
+            return ResponseHandler.handleResponse("Successfully deleted category", HttpStatus.OK,null);
+        }catch (Exception e){
+            return ResponseHandler.handleResponse("ERROR", HttpStatus.BAD_REQUEST,e.getMessage());
+        }
+    }
+
+
 }

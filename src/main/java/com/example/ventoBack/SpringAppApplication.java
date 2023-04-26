@@ -1,4 +1,4 @@
-package com.example.springApp;
+package com.example.ventoBack;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

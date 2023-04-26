@@ -1,5 +1,4 @@
-package com.example.springApp.Entities;
-
+package com.example.ventoBack.Entities;
 
 import lombok.*;
 
@@ -9,11 +8,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-@Entity
+@Data
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

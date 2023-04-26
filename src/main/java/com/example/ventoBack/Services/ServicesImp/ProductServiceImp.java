@@ -1,8 +1,10 @@
-package com.example.springApp.Services.ServicesImp;
+package com.example.ventoBack.Services.ServicesImp;
 
-import com.example.springApp.Entities.Product;
-import com.example.springApp.Repositories.ProductRepository;
-import com.example.springApp.Services.ProductService;
+import com.example.ventoBack.Entities.Product;
+import com.example.ventoBack.Repositories.ProductRepository;
+import com.example.ventoBack.Services.ProductService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,15 +12,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-@Primary
+@RequiredArgsConstructor
 public class ProductServiceImp implements ProductService {
 
-    private final ProductRepository productRepository;
+    private final  ProductRepository productRepository;
 
-    public ProductServiceImp(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
 
     @Override
     public Product addProduct(Product product) {
@@ -57,6 +58,12 @@ public class ProductServiceImp implements ProductService {
         return  eventPage;
     }
 
+
+    public List<Product> fetchProductByCategory(String category) {
+        return productRepository.findByCategory(category);
+    }
+    
+
     private Page<Product> getProductsList(int page, int limit) {
         Pageable pageable = PageRequest.of(page, limit);
         return productRepository.findAll(pageable);
@@ -81,4 +88,9 @@ public class ProductServiceImp implements ProductService {
         Pageable pageable = PageRequest.of(page, limit,sort);
         return productRepository.findByEventNameContainingIgnoreCase(eventName,pageable);
     }
+
+//
+//    private List<Product> fetchProductsByCategory(String category){
+//        return productRepository.findByCategory(category);
+//    }
 }

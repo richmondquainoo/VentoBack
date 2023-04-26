@@ -1,9 +1,10 @@
-package com.example.springApp.Controllers;
+package com.example.ventoBack.Controllers;
 
 
-import com.example.springApp.Entities.Product;
-import com.example.springApp.Services.ProductService;
-import com.example.springApp.Handlers.ResponseHandler;
+import com.example.ventoBack.Entities.Product;
+import com.example.ventoBack.Services.ProductService;
+import com.example.ventoBack.Handlers.ResponseHandler;
+import com.example.ventoBack.Services.ServicesImp.ProductServiceImp;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -11,16 +12,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/events")
 public class ProductController {
 
 
     private final ProductService productService;
+    private final ProductServiceImp productServiceImp;
 
-    public ProductController(ProductService productService) {
+
+
+    public ProductController(ProductService productService, ProductServiceImp productServiceImp) {
         this.productService = productService;
+        this.productServiceImp = productServiceImp;
     }
 
     @GetMapping
@@ -45,6 +52,19 @@ public class ProductController {
             return ResponseHandler.handleResponse("ERROR", HttpStatus.BAD_REQUEST,e.getMessage());
         }
     }
+
+
+    @GetMapping("/fetchProductsByCategory/{category}")
+    public ResponseEntity<Object> fetchProductsByCategory(@PathVariable String category){
+        try{
+            List<Product> fetchedProducts = productServiceImp.fetchProductByCategory(category);
+            return ResponseHandler.handleResponse("Successfully fetched products by category",HttpStatus.OK,fetchedProducts);
+
+        }catch(Exception e){
+            return ResponseHandler.handleResponse("ERROR", HttpStatus.BAD_REQUEST,e.getMessage());
+        }
+    }
+
 
     @PutMapping("/editEvent")
     public ResponseEntity<Object> editProduct(@RequestBody @Valid Product product){
