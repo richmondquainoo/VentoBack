@@ -36,7 +36,6 @@ public class CategoryController {
     }
 
 
-
     @PostMapping("/createCategory")
     public ResponseEntity<Object> createCategory(@RequestBody Category category){
         try{
@@ -47,7 +46,6 @@ public class CategoryController {
             return ResponseHandler.handleResponse("ERROR", HttpStatus.BAD_REQUEST,e.getMessage());
         }
     }
-
 
     @PutMapping("/editCategory")
     public ResponseEntity<Object> editProduct(@RequestBody @Valid Category category){

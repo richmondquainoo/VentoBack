@@ -37,7 +37,6 @@ public class CategoryServiceImp {
         return null;
     }
 
-
     public void deleteCategory(Long id) {
         categoryRepository.deleteById(id);
     }
