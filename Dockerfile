@@ -1,5 +1,5 @@
 FROM openjdk:17
 ARG JAR_FILE=target/*.jar
-COPY ./target/VentoBack-0.0.1-SNAPSHOT.jar app.jar
+COPY ./target/devops-integration.jar devops-integration.jar
 
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-jar", "/devops-integration.jar"]
