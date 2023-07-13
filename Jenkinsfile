@@ -12,7 +12,7 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
-        stage('Build docker image'){v
+        stage('Build docker image'){
             steps{
                 script{
                     sh 'docker build -t nanaamfohquain/app .'
