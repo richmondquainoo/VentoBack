@@ -25,7 +25,7 @@ pipeline {
                  script{
 
                      withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'docker_psd')]) {
-                            sh 'docker login -u nanaamfohquain -p ${docker_psd}'
+                            sh 'docker login -u nanaamfohquain -p Quainoo$!$^4146'
 
                              sh 'docker push nanaamfohquain/app:latest'
                      }
