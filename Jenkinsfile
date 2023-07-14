@@ -27,15 +27,9 @@ pipeline {
                      withCredentials([string(credentialsId: 'docker_password', variable: 'DockerCred')]) {
                             sh 'docker login -u nanaamfohquain -p DockerCred'
 
-                             sh 'docker push nanaamfohquain/devops:latest'
+                             sh 'docker push nanaamfohquain/app:latest'
                      }
 
-                     withCredentials([string(credentialsId: 'docker_psd', variable: 'dockerHub')]) {
-                         sh 'docker login -u nanaamfohquain -p ${dockerHub}'
-
-                         sh 'docker push nanaamfohquain/app:latest'
-
-                     }
                  }
              }
          }
