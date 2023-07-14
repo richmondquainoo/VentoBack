@@ -20,25 +20,25 @@ pipeline {
                 }
             }
         }
-//         stage('Push docker image to hub'){
-//             steps{
-//                 script{
-//
-//                     withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'docker_psd')]) {
-//                            sh 'docker login -u nanaamfohquain -p ${docker_psd}'
-//
-//                             sh 'docker push nanaamfohquain/app:latest'
-//                     }
-//
-//                     withCredentials([string(credentialsId: 'docker_psd', variable: 'dockerHub')]) {
-//                         sh 'docker login -u nanaamfohquain -p ${dockerHub}'
-//
-//                         sh 'docker push nanaamfohquain/app:latest'
-//
-//                     }
-//                 }
-//             }
-//         }
+         stage('Push docker image to hub'){
+             steps{
+                 script{
+
+                     withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'docker_psd')]) {
+                            sh 'docker login -u nanaamfohquain -p ${docker_psd}'
+
+                             sh 'docker push nanaamfohquain/app:latest'
+                     }
+
+                     withCredentials([string(credentialsId: 'docker_psd', variable: 'dockerHub')]) {
+                         sh 'docker login -u nanaamfohquain -p ${dockerHub}'
+
+                         sh 'docker push nanaamfohquain/app:latest'
+
+                     }
+                 }
+             }
+         }
     }
 
 
