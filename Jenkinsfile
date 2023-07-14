@@ -24,10 +24,10 @@ pipeline {
              steps{
                  script{
 
-                     withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'docker_psd')]) {
-                            sh 'docker login -u nanaamfohquain -p Quainoo$!$^4146'
+                     withCredentials([string(credentialsId: 'docker_password', variable: 'DockerCred')]) {
+                            sh 'docker login -u nanaamfohquain -p DockerCred'
 
-                             sh 'docker push nanaamfohquain/app:latest'
+                             sh 'docker push nanaamfohquain/devops:latest'
                      }
 
                      withCredentials([string(credentialsId: 'docker_psd', variable: 'dockerHub')]) {
