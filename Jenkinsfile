@@ -23,8 +23,8 @@ pipeline {
          stage('Push docker image to hub'){
              steps{
                  script{
-                     withCredentials([string(credentialsId: 'password_docker', variable: 'DockerCredentials')]) {
-                              sh 'docker login -u nanaamfohquain -p ${DockerCredentials}'
+                     withCredentials([string(credentialsId: 'DockerHubCred', variable: 'dockerHubPass')]) {
+                              sh 'docker login -u nanaamfohquain -p ${dockerHubPass}'
 
                               sh 'docker push nanaamfohquain/app:latest'
                      }
