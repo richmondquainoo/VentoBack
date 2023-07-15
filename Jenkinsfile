@@ -6,9 +6,16 @@ pipeline {
     }
 
     stages{
-
+        stage('Init and Fetch Code'){
+           steps{
+                slackSend channel: "#project", message: "Git init and code fetch - "
+            }
+        }
         stage('Build Maven'){
 
+            steps{
+                 sh "mvn -DskipTests clean package"
+            }
             steps{
                 slackSend(channel: '#project', message: 'Build Maven Started - Vento app')
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/richmondquainoo/VentoBack']])
@@ -22,10 +29,6 @@ pipeline {
                     sh 'docker build -t nanaamfohquain/app .'
                 }
             }
-            post {
-                failure {
-                  slackSend channel: "#project", message: "Build Failed - Vento app"
-            }
         }
          stage('Push docker image to hub'){
              steps{
@@ -37,10 +40,6 @@ pipeline {
                               sh 'docker push nanaamfohquain/app:latest'
                      }
                  }
-             }
-             post {
-                 failure {
-                   slackSend channel: "#project", message: "Build Failed for image push - Vento app"
              }
          }
     }
