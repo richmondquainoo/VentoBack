@@ -6,7 +6,7 @@ pipeline {
     }
 
     stages{
-        stage('Init'){
+        stage('Initialization'){
            steps{
                 slackSend(channel: '#project', message: 'Build Initialization')
             }
