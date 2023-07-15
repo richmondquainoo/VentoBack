@@ -6,7 +6,11 @@ pipeline {
     }
 
     stages{
-
+        stage('Init'){
+           steps{
+                slackSend channel: "#potbelly-pipeline", message: "Build started - ${env.JOB_NAME}:${env.BUILD_NUMBER} - (<${env.BUILD_URL}|Open>)"
+            }
+        }
         stage('Build Maven'){
             steps{
 
