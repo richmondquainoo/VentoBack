@@ -8,7 +8,7 @@ pipeline {
     stages{
         stage('Init and Fetch Code'){
            steps{
-                slackSend channel: "#project", message: "Git init and code fetch - "
+                slackSend(channel: "#project", message: "Git init and code fetch - ")
             }
         }
         stage('Build Maven'){
