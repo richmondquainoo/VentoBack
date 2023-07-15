@@ -8,14 +8,11 @@ pipeline {
     stages{
         stage('Init and Fetch Code'){
            steps{
-                slackSend(channel: "#project", message: "Git init and code fetch - ")
+                slackSend(channel: '#project', message: 'Git init and code fetch')
             }
         }
         stage('Build Maven'){
 
-            steps{
-                 sh "mvn -DskipTests clean package"
-            }
             steps{
                 slackSend(channel: '#project', message: 'Build Maven Started - Vento app')
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/richmondquainoo/VentoBack']])
