@@ -41,7 +41,7 @@ pipeline {
          }
           stage('Deploy to Kubernetes'){
               steps{
-                  slackSend(channel: '#project', color: 'good', message: 'Deploy to kubernetes -VentoApp')
+                  slackSend(channel: '#project', message: 'Deploy to kubernetes -VentoApp')
                   script{
                       kubernetesDeploy (configs: 'k8s-deployment.yaml', kubeconfigId: 'KubernetesPwd')
                       }
