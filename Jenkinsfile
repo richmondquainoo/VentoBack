@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Build docker image'){
             steps{
-                slackSend(channel: '#project', color: 'good', message: 'Build Docker image -VentoApp')
+                slackSend(channel: '#project', message: 'Build Docker image -VentoApp')
                 script{
                     sh 'docker build -t nanaamfohquain/app .'
 
