@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Build Maven'){
             steps{
-                slackSend(channel: '#project', color: 'good', message: 'Build Maven Started -VentoApp')
+                slackSend(channel: '#project', message: 'Build Maven Started -VentoApp')
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/richmondquainoo/VentoBack']])
                 sh 'mvn clean install'
             }
